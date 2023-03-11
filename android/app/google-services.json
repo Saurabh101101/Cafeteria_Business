@@ -1,0 +1,105 @@
+{
+  "project_info": {
+    "project_number": "40096218904",
+    "project_id": "canteen-7ec84",
+    "storage_bucket": "canteen-7ec84.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40096218904:android:9ab071a2aea2cdd749286d",
+        "android_client_info": {
+          "package_name": "com.apcoer.business.cafeteria"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "40096218904-d83jafenithjesfb8i992ds63r717v1m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxTCGGfC14DAvacNvq-wPzRWQZx2W3vRI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "40096218904-d83jafenithjesfb8i992ds63r717v1m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40096218904:android:722aa3cc9ab62ee649286d",
+        "android_client_info": {
+          "package_name": "com.apcoer.cafeteria_official"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "40096218904-d83jafenithjesfb8i992ds63r717v1m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxTCGGfC14DAvacNvq-wPzRWQZx2W3vRI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "40096218904-d83jafenithjesfb8i992ds63r717v1m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40096218904:android:0e25d41a5179993449286d",
+        "android_client_info": {
+          "package_name": "com.example.chef"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "40096218904-lu8gf39ep9fdo9b9qnc8d58v4q5hdobr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chef",
+            "certificate_hash": "af80dc6bb617f7891cab3aa654509657dd32e480"
+          }
+        },
+        {
+          "client_id": "40096218904-d83jafenithjesfb8i992ds63r717v1m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxTCGGfC14DAvacNvq-wPzRWQZx2W3vRI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "40096218904-d83jafenithjesfb8i992ds63r717v1m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
