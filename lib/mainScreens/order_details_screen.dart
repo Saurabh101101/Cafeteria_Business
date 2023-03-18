@@ -2,6 +2,7 @@ import 'package:cafeteria_business/widgets/progress_bar.dart';
 import 'package:cafeteria_business/widgets/status_banner.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:cafeteria_business/global/global.dart';
 
 import 'package:intl/intl.dart';
 
@@ -9,6 +10,7 @@ import 'package:intl/intl.dart';
 class OrderDetailsScreen extends StatefulWidget
 {
   final String? orderID;
+
 
   OrderDetailsScreen({this.orderID});
 
@@ -21,9 +23,17 @@ class OrderDetailsScreen extends StatefulWidget
 
 class _OrderDetailsScreenState extends State<OrderDetailsScreen>
 {
+
   String orderStatus = "";
   String orderByUser = "";
   String sellerId = "";
+
+  bool clicked=false;
+
+
+
+
+
 
   getOrderInfo()
   {
@@ -37,16 +47,31 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen>
     });
   }
 
+
+
+
+
+
+
   @override
   void initState() {
     super.initState();
 
     getOrderInfo();
+
+
+
   }
+
+
+
+
+
 
   @override
   Widget build(BuildContext context)
   {
+
     return Scaffold(
       body: SingleChildScrollView(
         child: FutureBuilder<DocumentSnapshot>(
@@ -101,10 +126,22 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen>
                             style: const TextStyle(fontSize: 16, color: Colors.grey),
                           ),
                         ),
+                        ElevatedButton(onPressed: !clicked?(){
+                          FirebaseFirestore.instance.collection("orders").doc(widget.orderID).update({"status":"picked"}).then((value){
+                            FirebaseFirestore.instance
+                                .collection("users")
+                                .doc(orderByUser)
+                                .collection("orders").doc(widget.orderID).update({"status":"picked"}).then((value){
+                                    const clicked=true;
+
+                            });
+                          });
+                        }:null, child:
+                        Text("Order Picked Up !")),
                         const Divider(thickness: 4,),
-                        orderStatus == "ended"
-                            ? Image.asset("assets/images/ready.png")
-                            : Image.asset("assets/images/placed.webp"),
+                        orderStatus == "ready"
+                            ? Image.asset("assets/images/ready1.jpg")
+                            : Image.asset("assets/images/picked.png"),
 
 
                       ],

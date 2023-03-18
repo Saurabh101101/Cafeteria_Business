@@ -1,5 +1,6 @@
 import 'package:cafeteria_business/assistant_methods/assistant_methods.dart';
 import 'package:cafeteria_business/global/global.dart';
+import 'package:cafeteria_business/mainScreens/order_card_new.dart';
 import 'package:cafeteria_business/widgets/order_card.dart';
 import 'package:cafeteria_business/widgets/progress_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -45,7 +46,7 @@ class _NewOrdersScreenState extends State<NewOrdersScreen>
                         builder: (c, snap)
                         {
                           return snap.hasData
-                              ? OrderCard(
+                              ? OrderCardNew(
                             itemCount: snap.data!.docs.length,
                             data: snap.data!.docs,
                             orderID: snapshot.data!.docs[index].id,
