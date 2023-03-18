@@ -27,7 +27,7 @@ class _HistoryScreenState extends State<HistoryScreen>
           stream: FirebaseFirestore.instance
               .collection("orders")
               .where("sellerUID", isEqualTo: sharedPreferences!.getString("uid"))
-              .where("status", isEqualTo: "ended").orderBy("orderTime",descending: true)
+              .where("status" ,whereIn: ["ready", "picked"] ).orderBy("orderTime",descending: true)
               .snapshots(),
           builder: (c, snapshot)
           {
