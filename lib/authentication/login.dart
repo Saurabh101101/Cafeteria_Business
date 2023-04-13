@@ -111,79 +111,79 @@ class _MyLoginState extends State<MyLogin> {
         body: Stack(
           children: [
             Container(
-              padding: EdgeInsets.only(left: 35,top:MediaQuery.of(context).size.height*0.1),
-              child: Text('Welcome',style: TextStyle(
+              padding: EdgeInsets.only(left: 35,top:MediaQuery.of(context).size.height*0.2),
+              child: Text('WELCOME',style: TextStyle(
                 color: Color(0xFFFFFFFF),
-                fontSize: 40,
+                fontSize: 50,
               ),),
               
             ),
             Padding(
-              padding: EdgeInsets.only(left: 35,top:MediaQuery.of(context).size.height*0.20),
+              padding: EdgeInsets.only(left: 35,top:MediaQuery.of(context).size.height*0.30),
               child: Row(
                 children: [
                   Text('SIGN IN',style: TextStyle(
                       color: Colors.white,
-                      fontSize: 30,)),
-                      SizedBox(width: 10),
-                      Icon(Icons.restaurant_outlined, color: Colors.white,size: 45),
+                      fontSize: 35,)),
+                      SizedBox(width: 20),
+                      Icon(Icons.cottage_outlined, color: Colors.white,size: 60,),
                 ],
               ),
             ),
-            Padding(
-              padding:  EdgeInsets.only(left: 35,right: 35,top:MediaQuery.of(context).size.height*0.30),
-              child: SizedBox(
-                height: 45,
-                width: 340,
-                child: ElevatedButton(onPressed: (){
-
-                  // final provider=Provider.of(context,listen: false);
-                  // provider.googleLogin();
-                },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.teal[900]?.withOpacity(0.5),
-                      shape: StadiumBorder(),
-                      elevation: 0,),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            "assets/images/google.png",
-                            height: 40,
-                            width: 40,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          const Text(
-                            "Login with Google",
-                            style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 18,
-                                color: Colors.white),
-                          ),
-                        ],
-                      ),)
-                ),
-              ),),
-            Padding(
-              padding:  EdgeInsets.only(top:MediaQuery.of(context).size.height*0.39,left:35,right:35),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                 Container(height:1.0,width:100.0,color:Colors.white),
-                 SizedBox(width: 10),
-                  Text("or",style: TextStyle(color:Colors.white,fontSize: 20)),
-                  SizedBox(width: 10),
-                  Container(height:1.0,width:100.0,color:Colors.white),
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding:  EdgeInsets.only(left: 35,right: 35,top:MediaQuery.of(context).size.height*0.30),
+            //   child: SizedBox(
+            //     height: 45,
+            //     width: 340,
+            //     child: ElevatedButton(onPressed: (){
+            //
+            //       // final provider=Provider.of(context,listen: false);
+            //       // provider.googleLogin();
+            //     },
+                    // style: ElevatedButton.styleFrom(
+                    //   backgroundColor: Colors.teal[900]?.withOpacity(0.5),
+                    //   shape: StadiumBorder(),
+                    //   elevation: 0,),
+                    // child: Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.center,
+                    //     children: [
+                    //       Image.asset(
+                    //         "assets/images/google.png",
+                    //         height: 40,
+                    //         width: 40,
+                    //       ),
+                    //       SizedBox(
+                    //         width: 10,
+                    //       ),
+                    //       const Text(
+                    //         "Login with Google",
+                    //         style: TextStyle(
+                    //             fontFamily: 'Roboto',
+            //                     fontSize: 18,
+            //                     color: Colors.white),
+            //               ),
+            //             ],
+            //           ),)
+            //     ),
+            //   ),),
+            // Padding(
+            //   padding:  EdgeInsets.only(top:MediaQuery.of(context).size.height*0.39,left:35,right:35),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //      Container(height:1.0,width:100.0,color:Colors.white),
+            //      SizedBox(width: 10),
+            //       Text("or",style: TextStyle(color:Colors.white,fontSize: 20)),
+            //       SizedBox(width: 10),
+            //       Container(height:1.0,width:100.0,color:Colors.white),
+            //     ],
+            //   ),
+            // ),
             SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*0.45,right: 35,left: 35),
+                padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*0.42,right: 35,left: 35),
                 child: Column(
                   children: [
                     Form(
@@ -194,57 +194,63 @@ class _MyLoginState extends State<MyLogin> {
                             TextField(
                               controller: emailController,
                               decoration: InputDecoration(
-                                  prefixIcon: Icon(Icons.mail_sharp),
+                                  prefixIcon: Icon(Icons.mail_sharp,color: Colors.teal[900]),
                                   fillColor: Colors.white,
                                   filled: true,
                                   hintText:'Enter Email',
-                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))
+                                  hintStyle: TextStyle(color: Colors.teal[900]),
+                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))
                               ),
                             ),
-                            SizedBox(height: 30),
+                            SizedBox(height: 40),
                             TextField(
                               obscureText: _isHidden,
                               controller: passwordController,
                               decoration: InputDecoration(
-                                  prefixIcon: Icon(Icons.key_outlined),
+                                  prefixIcon: Icon(Icons.key_outlined,color: Colors.teal[900]),
                                   fillColor: Colors.white,
                                   filled: true,
                                   hintText:'Enter Password',
-                                  suffix: InkWell(onTap:_toggle,child: Icon(_isHidden?Icons.visibility:Icons.visibility_off,)),
-                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))
+                                  hintStyle: TextStyle(color: Colors.teal[900]),
+                                  suffix: InkWell(onTap:_toggle,child: Icon(_isHidden?Icons.visibility_off:Icons.visibility,color: Colors.teal[900],)),
+                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))
                               ),
                             ),
                           ],
                     ),),
 
                     SizedBox(
-                      height: 30,
+                      height: 40,
                     ),
                     SizedBox(
                       height: 45,
-                      width: 150,
+                      width: 140,
                       child: ElevatedButton(onPressed: (){
                         formValidation();
                       },
 
                         style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.teal[900],
+                        backgroundColor: Colors.teal[900]?.withOpacity(0.8),
                         shape: StadiumBorder(),
-                        elevation: 10.0,
+                        elevation: 20.0,
                         textStyle: const TextStyle(color:Colors.blueAccent)
 
                        ),
-                       child: const Text('Sign in')),
+                       child: const Text('Sign In',style: TextStyle(fontWeight: FontWeight.bold),)),
+                    ),
+                    SizedBox(
+                      height: 20,
                     ),
                     Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Don't Have a account ?",style: TextStyle(color:Colors.white), ),
+
+                          Text("Don't Have an Account ?",style: TextStyle(color:Colors.white,fontSize: 15),),
                           TextButton(onPressed: (){
                             Navigator.push(context, MaterialPageRoute(builder: (context)=>MySignup()));
                           },
-                           child: const Text("Sign Up",style: TextStyle(color:Colors.lightGreenAccent),)),
+                           child: const Text("Sign Up",style: TextStyle(color:Colors.tealAccent,fontSize: 15,decoration: TextDecoration.underline),)),
                         ],
                       ),
                     ),
