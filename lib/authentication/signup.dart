@@ -15,6 +15,7 @@ import 'package:firebase_storage/firebase_storage.dart' as fStorage;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../global/global.dart';
+import 'login.dart';
 
 
 
@@ -59,7 +60,7 @@ class MySignupState extends State <MySignup> {
           context: context,
           builder:(c)
             {
-              return ErrorDialog(message: "Please Select an image",);
+              return ErrorDialog(message: "Please Select an Image",);
             }
         );
       }
@@ -70,7 +71,7 @@ class MySignupState extends State <MySignup> {
         showDialog(context: context, builder: (c)
         {
           return LoadingDialog(
-            message: "Signing you up..",
+            message: "Signing You Up..",
           );
         }
         );
@@ -91,7 +92,7 @@ class MySignupState extends State <MySignup> {
             context: context,
             builder:(c)
             {
-              return ErrorDialog(message: "Please fill all required fields",);
+              return ErrorDialog(message: "Please Fill All Required Fields",);
             }
         );
       }
@@ -164,31 +165,32 @@ class MySignupState extends State <MySignup> {
           children: [
             Container(
               padding: EdgeInsets.only(left: 35,top:MediaQuery.of(context).size.height*0.1),
-              child: Row(
-                children: [
-                  Text('Welcome',style: TextStyle(
+              child: Text('WELCOME',style: TextStyle(
                     color: Color(0xFFFFFFFF),
-                    fontSize: 40,
+                    fontSize: 50,
                   ),),
-                      SizedBox(width: 10),
-                      Icon(Icons.restaurant_outlined, color: Colors.white,size: 45),
-                ],
+                      // SizedBox(width: 10),
+                      // Icon(Icons.restaurant_outlined, color: Colors.white,size: 45),
                 
-              ),
+               ),
               
-            ),
+
             Padding(
-              padding: EdgeInsets.only(left: 35,top:MediaQuery.of(context).size.height*0.20),
-              child: 
+              padding: EdgeInsets.only(left: 35,top:MediaQuery.of(context).size.height*0.18),
+              child:Row(
+                  children: [
                   Text('Create Account',style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,)),
-                      
+                      SizedBox(width: 10),
+                      Icon(Icons.cottage_outlined, color: Colors.white,size: 60,),
+                  ],
+              )
               ),
             SingleChildScrollView(
 
               child: Container(
-                padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*0.25,right: 35,left: 35),
+                padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*0.28,right: 35,left: 35),
                 child: Column(
                   children: [
                     InkWell(
@@ -200,7 +202,7 @@ class MySignupState extends State <MySignup> {
                         radius: MediaQuery.of(context).size.width*0.10,
                         backgroundColor: Colors.white,
                         backgroundImage:imageXFile==null ?null :FileImage(File(imageXFile!.path)) ,
-                        child: imageXFile==null? Icon(Icons.add_a_photo_sharp,size: MediaQuery.of(context).size.width*0.10,color: Colors.grey,):null,
+                        child: imageXFile==null? Icon(Icons.add_photo_alternate_rounded,size: MediaQuery.of(context).size.width*0.1,color: Colors.teal[900],):null,
                       ),
                     ),
 
@@ -212,22 +214,24 @@ class MySignupState extends State <MySignup> {
                             TextField(
                               controller: nameController,
                               decoration: InputDecoration(
-                                  prefixIcon: Icon(Icons.person_add_outlined),
+                                  prefixIcon: Icon(Icons.person_add_outlined,color: Colors.teal[900]),
                                   fillColor: Colors.white,
                                   filled: true,
-                                  hintText:'Full Name',
-                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))
+                                  hintText:'Enter Name',
+                                  hintStyle: TextStyle(color: Colors.teal[900]),
+                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))
                               ),
                             ),
                             SizedBox(height: 15),
                             TextField(
                               controller: phoneController,
                               decoration: InputDecoration(
-                                  prefixIcon: Icon(Icons.call_rounded),
+                                  prefixIcon: Icon(Icons.call_rounded,color: Colors.teal[900]),
                                   fillColor: Colors.white,
                                   filled: true,
-                                  hintText:'Phone Number',
-                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))
+                                  hintText:'Enter Phone Number',
+                                  hintStyle: TextStyle(color: Colors.teal[900]),
+                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))
                               ),
                             ),
                             SizedBox(height: 15),
@@ -236,11 +240,12 @@ class MySignupState extends State <MySignup> {
 
                               decoration: InputDecoration(
 
-                                  prefixIcon: Icon(Icons.mail_sharp),
+                                  prefixIcon: Icon(Icons.mail_sharp,color: Colors.teal[900]),
                                   fillColor: Colors.white,
                                   filled: true,
-                                  hintText:'Email',
-                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))
+                                  hintText:'Enter Email',
+                                  hintStyle: TextStyle(color: Colors.teal[900]),
+                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))
                               ),
                             ),
                             SizedBox(height: 15),
@@ -249,18 +254,19 @@ class MySignupState extends State <MySignup> {
 
                               obscureText: _isHidden1,
                               decoration: InputDecoration(
-                                  prefixIcon: Icon(Icons.key_outlined),
+                                  prefixIcon: Icon(Icons.key_outlined,color: Colors.teal[900]),
                                   fillColor: Colors.white,
                                   filled: true,
                                   hintText:'Enter Password',
-                                  suffix: InkWell(onTap:_toggle1,child: Icon(_isHidden1?Icons.visibility:Icons.visibility_off,)),
-                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))
+                                  hintStyle: TextStyle(color: Colors.teal[900]),
+                                  suffix: InkWell(onTap:_toggle1,child: Icon(_isHidden1?Icons.visibility_off:Icons.visibility,)),
+                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))
                               ),
                             ),
                           ],
                         )),
 
-                    SizedBox(height: 22),
+                    SizedBox(height: 40),
                     SizedBox(
                       height: 45,
                       width: 150,
@@ -269,61 +275,36 @@ class MySignupState extends State <MySignup> {
                         },
 
                         style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.teal[900],
+                        backgroundColor: Colors.teal[900]?.withOpacity(0.8),
                         shape: StadiumBorder(),
-                        elevation: 10.0,
+                        elevation: 20.0,
                         textStyle: const TextStyle(color:Colors.blueAccent)
-
                        ),
-                       child: const Text('Sign up')),
+                       child: const Text('Sign Up',style: TextStyle(fontWeight: FontWeight.bold),)),
+                    ),
+                    SizedBox(height: 20,),
+                    Center(
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children:[
+
+                              Text('Already have an account ?',style: TextStyle(
+                                  color:Colors.white,fontSize: 15
+                              ),),
+
+                              TextButton(onPressed: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>MyLogin()));
+                              },
+                                  child: const Text("Sign In",style: TextStyle(color:Colors.tealAccent,fontSize: 15,decoration: TextDecoration.underline),)),
+                            ]
+                        )
                     ),
           ],
         ),
         )),
-        Padding(
-              padding:  EdgeInsets.only(top:MediaQuery.of(context).size.height*0.82,left:35,right:35),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                 Container(height:2.0,width:100.0,color:Colors.white),
-                 SizedBox(width: 10),
-                  Text("or",style: TextStyle(color:Colors.white,fontSize: 20)),
-                  SizedBox(width: 10),
-                  Container(height:2.0,width:100.0,color:Colors.white),
-                ],
-              ),
-            ),
-        Padding(
-          padding:  EdgeInsets.only(top:MediaQuery.of(context).size.height*0.84,left: 100,right: 90),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-           children:[ 
-            SizedBox(height: 25),
-             Text('Already have an account ?',style: TextStyle(
-                      color: Color(0xFFFFFFFF),
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),),
-                    SizedBox(height: 15),
-                    SizedBox(
-                      height: 45,
-                      width: 150,
-                      child: ElevatedButton(onPressed: (){
-                        Navigator.pop(context);
-                      },
-                       
-                        style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.teal[900],
-                        shape: StadiumBorder(),
-                        elevation: 10.0,
-                        textStyle: const TextStyle(color:Colors.teal)
-                        
-                       ),
-                       child: const Text('Sign in')),
-                    ),
-           ]
-          ),
-        )
+
+
+        // )
         ]
         )
         )
