@@ -25,7 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         drawer: MyDrawer(),
         appBar: AppBar(
-          title: Text(sharedPreferences!.getString("name")!,),
+          backgroundColor: Colors.teal[900],
+          title: Text("Welcome "+sharedPreferences!.getString("name")!,),
           centerTitle: true,
           automaticallyImplyLeading: true,
           actions: [
@@ -38,7 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
           slivers: [
            const SliverToBoxAdapter(
               child: ListTile(
-                title: Text("Categories",textAlign: TextAlign.center,),
+                tileColor: Colors.teal,
+                title: Text("Categories",textAlign: TextAlign.center,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold)),
               ),
             ),
             StreamBuilder<QuerySnapshot>(
