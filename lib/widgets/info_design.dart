@@ -38,46 +38,44 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (c)=>ItemsScreen(model:widget.model)));
       },
-      splashColor: Colors.amber,
+      splashColor: Colors.teal[900],
       child: Padding(
         padding: const EdgeInsets.all(5.0),
         child: Container(
+          color: Colors.grey[400],
           height: 300,
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
-              Divider(
-                height: 4,
-                thickness: 3,
-                color: Colors.grey[300],
-              ),
+
               Image.network(
                   widget.model!.thumbnailUrl!,
-                  height: 220.0,
+                  height: 200.0,
                 fit: BoxFit.cover,
               ),
-              const SizedBox(height: 1.0,),
+              const SizedBox(height: 20.0,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     widget.model!.menuTitle!,
                     style: const TextStyle(
-                      color: Colors.cyan,
+                      color: Colors.teal,
                       fontSize: 20,
                       fontFamily: "Train",
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   IconButton(onPressed: (){
                     //delete menu
                     deleteMenu(widget.model!.menuId!);
-                  }, icon: const Icon(Icons.delete_sweep),color: Colors.red,)
+                  }, icon: const Icon(Icons.delete_sweep),color: Colors.teal[900])
                 ],
               ),
               Divider(
-                height: 4,
+                height: 8,
                 thickness: 3,
-                color: Colors.grey[300],
+                color: Colors.teal[900],
               ),
             ],
           ),
