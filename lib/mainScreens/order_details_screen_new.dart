@@ -24,19 +24,11 @@ class _OrderDetailsScreenNewState extends State<OrderDetailsScreenNew>
   String orderStatus = "";
   String orderByUser = "";
   String sellerId = "";
+  double orderPrice=0.0;
   double previousEarning=0.0;
   bool clicked=false;
 
-  getPreviousEarning()
-  {
-    FirebaseFirestore.instance
-        .collection("sellers")
-        .doc("DpuAj3utfVef9klNf5Pyb3tTwyH3").get().then((DocumentSnapshot)
-    {
-      previousEarning = DocumentSnapshot.data()!["earnings"];
 
-    });
-  }
 
   getOrderInfo()
   {
@@ -47,6 +39,16 @@ class _OrderDetailsScreenNewState extends State<OrderDetailsScreenNew>
       orderStatus = DocumentSnapshot.data()!["status"].toString();
       orderByUser = DocumentSnapshot.data()!["orderBy"].toString();
       sellerId = DocumentSnapshot.data()!["sellerUID"].toString();
+      orderPrice=double.parse(DocumentSnapshot.data()!["totalAmount"].toString());
+
+    });
+  }
+  
+  
+  getPreviousEarning()
+  {
+    FirebaseFirestore.instance.collection("sellers").doc("DpuAj3utfVef9klNf5Pyb3tTwyH3").get().then((DocumentSnapshot) {
+      previousEarning=double.parse(DocumentSnapshot.data()!["earnings"].toString());
     });
   }
 
@@ -55,6 +57,7 @@ class _OrderDetailsScreenNewState extends State<OrderDetailsScreenNew>
     super.initState();
 
     getOrderInfo();
+    getPreviousEarning();
   }
 
   @override
@@ -123,7 +126,7 @@ class _OrderDetailsScreenNewState extends State<OrderDetailsScreenNew>
                           .collection("orders").doc(widget.orderID).update({"status":"ready"}).then((value){
                         FirebaseFirestore.instance
                             .collection("sellers")
-                            .doc("DpuAj3utfVef9klNf5Pyb3tTwyH3").update({"earnings":previousEarning+dataMap!["totalAmount"]}).then((value){
+                            .doc("DpuAj3utfVef9klNf5Pyb3tTwyH3").update({"earnings":(previousEarning+orderPrice)}).then((value){
                           const clicked=true;
                         });
                       });
