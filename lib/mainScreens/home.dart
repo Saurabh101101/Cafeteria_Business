@@ -22,55 +22,60 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async =>false,
-      child: Scaffold(
-        drawer: MyDrawer(),
-        appBar: AppBar(
-          backgroundColor: Colors.teal[900],
-          title: Text("Welcome "+sharedPreferences!.getString("name")!,),
-          centerTitle: true,
-          automaticallyImplyLeading: true,
-          actions: [
-            IconButton(onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (c)=>const CategoryUploadScreen()));
-            }, icon: const Icon(Icons.post_add_sharp))
-          ],
-        ),
-        body: CustomScrollView(
-          slivers: [
-           const SliverToBoxAdapter(
-              child: ListTile(
-                tileColor: Colors.teal,
-                title: Text("Categories",textAlign: TextAlign.center,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold)),
+      child: Container(constraints: BoxConstraints.expand(),
+        decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/bg.png'), fit: BoxFit.cover,) ),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          drawer: MyDrawer(),
+          appBar: AppBar(
+            backgroundColor: Colors.teal[900]?.withOpacity(0.85),
+            title: Text("Welcome "+sharedPreferences!.getString("name")!,),
+            centerTitle: true,
+            automaticallyImplyLeading: true,
+            actions: [
+              IconButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (c)=>const CategoryUploadScreen()));
+              }, icon: const Icon(Icons.post_add_sharp))
+            ],
+          ),
+          body: CustomScrollView(
+            slivers: [
+             const SliverToBoxAdapter(
+                child: ListTile(
+                  title: Text("Categories",textAlign: TextAlign.center,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold)),
+                ),
               ),
-            ),
-            StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance.
-              collection("sellers").doc(sharedPreferences!.getString("uid"))
-              .collection("categories").snapshots(),
-              builder: (context,snapshot) {
-                return !snapshot.hasData
-                    ? SliverToBoxAdapter(
-                  child: Center(
-                    child: circularProgress(),
-                  ),
+              StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance.
+                collection("sellers").doc(sharedPreferences!.getString("uid"))
+                .collection("categories").snapshots(),
+                builder: (context,snapshot) {
+                  return !snapshot.hasData
+                      ? SliverToBoxAdapter(
+                    child: Center(
+                      child: circularProgress(),
+                    ),
+                  )
+                      :SliverStaggeredGrid.countBuilder(crossAxisCount: 2, staggeredTileBuilder: (c)=>StaggeredTile.fit(1),
+                    itemBuilder: (context, index) {
+                      Categories model =Categories.fromJson(
+                        snapshot.data!.docs[index].data()! as Map<String,dynamic>,
+                      );
+                      return InfoDesignWidget(
+                        model: model,
+                        context: context,
+                      );
+                    },
+                    itemCount: snapshot.data!.docs.length,
+                  );
+                }
                 )
-                    :SliverStaggeredGrid.countBuilder(crossAxisCount: 1, staggeredTileBuilder: (c)=>StaggeredTile.fit(1),
-                  itemBuilder: (context, index) {
-                    Categories model =Categories.fromJson(
-                      snapshot.data!.docs[index].data()! as Map<String,dynamic>,
-                    );
-                    return InfoDesignWidget(
-                      model: model,
-                      context: context,
-                    );
-                  },
-                  itemCount: snapshot.data!.docs.length,
-                );
-              }
-              )
-          ]
+            ]
 
     ),
+        ),
       ),
     );
   }
