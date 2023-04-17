@@ -25,52 +25,54 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
+
         Navigator.push(context, MaterialPageRoute(builder: (c)=>ItemDetailsScreen(model:widget.model)));
       },
       splashColor: Colors.amber,
       child: Padding(
         padding: const EdgeInsets.all(5.0),
-        child: Container(
-          height: 280,
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            children: [
-              Divider(
-                height: 4,
-                thickness: 3,
-                color: Colors.grey[300],
-              ),
-              SizedBox(height: 2,),
-              Text(
-                widget.model!.title!,
-                style: const TextStyle(
-                  color: Colors.cyan,
-                  fontSize: 20,
-                  fontFamily: "Train",
+        child:Container(
+            height: MediaQuery.of(context).size.height*0.35,
+            width: MediaQuery.of(context).size.width*0.48,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft:Radius.circular(25) ,
+                  topRight:Radius.zero ,
+                  bottomLeft:Radius.zero,
+                  bottomRight: Radius.circular(25),
+                )
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CircleAvatar(backgroundImage: NetworkImage( widget.model!.thumbnailUrl!),radius: MediaQuery.of(context).size.width*0.17,),
                 ),
-              ),
-              SizedBox(height: 2,),
-              Image.network(
-                widget.model!.thumbnailUrl!,
-                height: 220.0,
-                fit: BoxFit.cover,
-              ),
-              const SizedBox(height: 1.0,),
-
-              Text(
-                widget.model!.shortInfo!,
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12,
+                const SizedBox(height: 8,),
+                Padding(
+                  padding: const EdgeInsets.all(1.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(widget.model!.title!,style:TextStyle(
+                        fontSize: 16.5,
+                        fontWeight: FontWeight.bold,
+                      )
+                      ),
+                      SizedBox(width:10 ),
+                    ],
+                  ),),
+                SizedBox(height: 8),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8,right: 8,bottom:4,top: 4),
+                  child: Text(widget.model!.shortInfo!,style: TextStyle(
+                    fontStyle: FontStyle.italic,
+                    fontSize: 16,color: Colors.cyan,
+                  ),),
                 ),
-              ),
-              Divider(
-                height: 4,
-                thickness: 3,
-                color: Colors.grey[300],
-              ),
-            ],
-          ),
+                ],
+            )
         ),
       ),
     );
