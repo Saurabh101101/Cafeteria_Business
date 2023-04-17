@@ -22,30 +22,56 @@ class InfoDesignWidget extends StatefulWidget
 
 
 class _InfoDesignWidgetState extends State<InfoDesignWidget> {
-  
-  deleteMenu(String menuId)
-  {
-    FirebaseFirestore.instance.collection("sellers")
-        .doc(sharedPreferences!.getString("uid")).collection("categories").doc(menuId).delete();
 
-    Fluttertoast.showToast(msg: "The selected Category has been deleted successfully !");
+  deleteMenu(String menuId) {
+    FirebaseFirestore.instance.collection("sellers")
+        .doc(sharedPreferences!.getString("uid")).collection("categories").doc(
+        menuId).delete();
+
+    Fluttertoast.showToast(
+        msg: "The selected Category has been deleted successfully !");
   }
-  
-  
+
+  Future <void> showAlertDialog()async {
+    return showDialog<void>(context: context,barrierDismissible: false,builder:
+    (BuildContext context)
+    {
+      return AlertDialog(
+        title: Text("Confirmation"),
+        content: Text("Do you really want to delete entire category?"),
+        actions: <Widget>[
+          ElevatedButton(onPressed: () {
+        Navigator.of(context).pop();
+      }, child: Text("Cancel")),
+          ElevatedButton(onPressed: () {
+            deleteMenu(widget.model!.menuId!);
+            Navigator.of(context).pop();
+          }, child: Text("Yes")),
+        ],
+      );
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-
-        Navigator.push(context, MaterialPageRoute(builder: (c)=>ItemsScreen(model:widget.model)));
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(
+            builder: (c) => ItemsScreen(model: widget.model)));
       },
       splashColor: Colors.amber,
       child: Padding(
         padding: const EdgeInsets.all(5.0),
-        child:Column(
+        child: Column(
           children: [
 
-            CircleAvatar(backgroundImage: NetworkImage( widget.model!.thumbnailUrl!),radius: MediaQuery.of(context).size.width*0.15,),
+            CircleAvatar(
+              backgroundImage: NetworkImage(widget.model!.thumbnailUrl!),
+              radius: MediaQuery
+                  .of(context)
+                  .size
+                  .width * 0.15,),
             const SizedBox(height: 3,),
 
             Row(
@@ -60,10 +86,12 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                IconButton(onPressed: (){
+                IconButton(onPressed: () {
 //delete menu
-                  deleteMenu(widget.model!.menuId!);
-                }, icon: const Icon(Icons.delete_sweep,size: 25,),color: Colors.red,)
+                  showAlertDialog();
+                },
+                  icon: const Icon(Icons.delete_sweep, size: 25,),
+                  color: Colors.red,)
               ],
             ),
 
@@ -73,6 +101,7 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
     );
   }
 }
+
 
 
 
