@@ -58,6 +58,7 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
                       Text(widget.model!.title!,style:TextStyle(
                         fontSize: 16.5,
                         fontWeight: FontWeight.bold,
+                        color: Colors.teal[900]
                       )
                       ),
                       SizedBox(width:10 ),
@@ -68,7 +69,7 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
                   padding: const EdgeInsets.only(left: 8,right: 8,bottom:4,top: 4),
                   child: Text(widget.model!.shortInfo!,style: TextStyle(
                     fontStyle: FontStyle.italic,
-                    fontSize: 16,color: Colors.cyan,
+                    fontSize: 16,color: Colors.teal,
                   ),),
                 ),
                 ],

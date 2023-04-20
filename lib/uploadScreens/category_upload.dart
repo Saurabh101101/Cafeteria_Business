@@ -29,9 +29,16 @@ class _CategoryUploadScreenState extends State<CategoryUploadScreen> {
   String uniqueId=DateTime.now().millisecondsSinceEpoch.toString();
   defaultScreen()
   {
-    return Scaffold(
+    return Container(
+        child: Container(constraints: BoxConstraints.expand(),
+    decoration: BoxDecoration(
+    image: DecorationImage(
+    image: AssetImage('assets/images/bg.png'), fit: BoxFit.cover,) ),
+    child: Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
-        title: const Text("Add New Category"),
+        backgroundColor: Colors.teal[900]?.withOpacity(0.85),
+        title: const Text("Add New Category",),
         centerTitle: true,
         automaticallyImplyLeading: true,
         leading: IconButton(
@@ -48,12 +55,12 @@ class _CategoryUploadScreenState extends State<CategoryUploadScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.shop_2_sharp, size: 150,),
+              const Icon(Icons.shop_2_sharp, size: 150,color: Colors.white ),
               ElevatedButton(onPressed: (){
                 takeImage(context);
               }, child: Text("Add New Category",style: TextStyle(color: Colors.white,fontSize: 18,),),
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.teal),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -66,7 +73,7 @@ class _CategoryUploadScreenState extends State<CategoryUploadScreen> {
           ),
         ),
       ),
-    );
+    )));
   }
 
 
