@@ -43,8 +43,15 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
 
 
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return  Container(
+        child: Container(constraints: BoxConstraints.expand(),
+    decoration: BoxDecoration(
+    image: DecorationImage(
+    image: AssetImage('assets/images/bg.png'), fit: BoxFit.cover,) ),
+      child: Scaffold(
+
       appBar: AppBar(
+        backgroundColor: Colors.teal[900]?.withOpacity(0.85),
         title: Text(sharedPreferences!.getString("name").toString()) ,
       ),
       body: SingleChildScrollView(
@@ -73,7 +80,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
               child: Text(
                 widget.model!.longDescription.toString(),
                 textAlign: TextAlign.justify,
-                style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 14),
+                style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 14,color: Colors.teal),
               ),
             ),
 
@@ -97,16 +104,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                 },
                 child: Container(
                   decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.cyan,
-                          Colors.amber,
-                        ],
-                        begin:  FractionalOffset(0.0, 0.0),
-                        end:  FractionalOffset(1.0, 0.0),
-                        stops: [0.0, 1.0],
-                        tileMode: TileMode.clamp,
-                      )
+                      color: Colors.teal
                   ),
                   width: MediaQuery.of(context).size.width - 13,
                   height: 50,
@@ -122,6 +120,6 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
           ],
         ),
       ),
-    );
+    )));
   }
 }

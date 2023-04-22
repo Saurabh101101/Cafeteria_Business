@@ -21,8 +21,13 @@ class _HistoryScreenState extends State<HistoryScreen>
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+        child: Container(constraints: BoxConstraints.expand(),
+    decoration: BoxDecoration(
+    image: DecorationImage(
+    image: AssetImage('assets/images/bg.png'), fit: BoxFit.cover,) ),
       child: Scaffold(
-        appBar: AppBar(title: const Text("HISTORY"),),
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(backgroundColor: Colors.teal[900]?.withOpacity(0.85),title: const Text("HISTORY"),),
         body: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
               .collection("orders")
@@ -61,6 +66,6 @@ class _HistoryScreenState extends State<HistoryScreen>
           },
         ),
       ),
-    );
+    ));
   }
 }

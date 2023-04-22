@@ -29,7 +29,8 @@ class _ItemsScreenState extends State<ItemsScreen> {
         backgroundColor: Colors.transparent,
         drawer: MyDrawer(),
         appBar: AppBar(
-          title: Text(sharedPreferences!.getString("name")!,),
+          backgroundColor: Colors.teal[900]?.withOpacity(0.85),
+          title: Text("Welcome "+sharedPreferences!.getString("name")!,),
           centerTitle: true,
           automaticallyImplyLeading: true,
           actions: [
