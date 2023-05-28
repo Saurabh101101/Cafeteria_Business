@@ -34,31 +34,38 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
   String uniqueId=DateTime.now().millisecondsSinceEpoch.toString();
   defaultScreen()
   {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Add New Item"),
-        centerTitle: true,
-        automaticallyImplyLeading: true,
-        leading: IconButton(
-          icon:const Icon(Icons.arrow_back,color: Colors.white,),
-          onPressed: ()
-          {
-            Navigator.push(context, MaterialPageRoute(builder: (c)=>HomeScreen()));
-          },
-        ),
+    return Container(
+        constraints: BoxConstraints.expand(),
+    decoration: BoxDecoration(
+    image: DecorationImage(
+    image: AssetImage('assets/images/bg.png'), fit: BoxFit.cover,) ),
+  child: Scaffold(
+  backgroundColor: Colors.transparent,
+  appBar: AppBar(
+  backgroundColor: Colors.teal[900]?.withOpacity(0.85),
+  title: const Text("Add New Item",),
+  centerTitle: true,
+  automaticallyImplyLeading: true,
+  leading: IconButton(
+  icon:const Icon(Icons.arrow_back,color: Colors.white,),
+  onPressed: ()
+  {
+  Navigator.push(context, MaterialPageRoute(builder: (c)=>HomeScreen()));
+  },
+  ),
 
-      ),
+  ),
       body: Container(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.shop_2_sharp, size: 150,),
+              const Icon(Icons.shop_2_sharp, size: 150,color: Colors.white ),
               ElevatedButton(onPressed: (){
                 takeImage(context);
               }, child: Text("Add New Item",style: TextStyle(color: Colors.white,fontSize: 18,),),
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.teal),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -71,7 +78,7 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
           ),
         ),
       ),
-    );
+    ));
   }
 
 

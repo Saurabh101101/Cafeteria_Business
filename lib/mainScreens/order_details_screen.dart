@@ -73,6 +73,18 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen>
   {
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text("O R D E R   D E T A I L S",
+          style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Montserrat'
+          ), ),
+        centerTitle:true ,
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.teal[900]?.withOpacity(0.85),
+        elevation: 0,
+      ),
       body: SingleChildScrollView(
         child: FutureBuilder<DocumentSnapshot>(
           future: FirebaseFirestore.instance
@@ -91,57 +103,84 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen>
                 ? Container(
                     child: Column(
                       children: [
-                        StatusBanner(
-                          status: dataMap!["isSuccess"],
-                          orderStatus: orderStatus,
-                        ),
-                        const SizedBox(
-                          height: 10.0,
-                        ),
+
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "€  " + dataMap["totalAmount"].toString(),
-                              style: const TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          child: Text(
+                            " Total Amount : ₹ " + dataMap!["totalAmount"].toString(),
+                            style: const  TextStyle(
+                                fontWeight: FontWeight.bold,color: Colors.teal,fontSize: 17,fontStyle: FontStyle.italic,
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Order Id = " + widget.orderID!,
-                            style: const TextStyle(fontSize: 16),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Order at: ${DateFormat("dd MMMM, yyyy - hh:mm aa")
-                                    .format(DateTime.fromMillisecondsSinceEpoch(int.parse(dataMap["orderTime"])))}",
-                            style: const TextStyle(fontSize: 16, color: Colors.grey),
-                          ),
-                        ),
-                        ElevatedButton(onPressed: !clicked?(){
-                          FirebaseFirestore.instance.collection("orders").doc(widget.orderID).update({"status":"picked"}).then((value){
-                            FirebaseFirestore.instance
-                                .collection("users")
-                                .doc(orderByUser)
-                                .collection("orders").doc(widget.orderID).update({"status":"picked"}).then((value){
-                                    const clicked=true;
 
-                            });
-                          });
-                        }:null, child:
-                        Text("Order Picked Up !")),
-                        const Divider(thickness: 4,),
+                        Text( "Order Id :"+dataMap!["orderId"].toString(),style: TextStyle(
+                            fontWeight: FontWeight.bold,color: Colors.teal,fontSize: 17,fontStyle: FontStyle.italic
+                        ),),
+                        const SizedBox(height: 10,),
+                        Text("Order Time : ${DateFormat("dd MMMM, yyyy - hh:mm aa")
+                            .format(DateTime.fromMillisecondsSinceEpoch(int.parse(dataMap["orderTime"])))}",style: TextStyle(
+                            fontWeight: FontWeight.bold,color: Colors.teal,fontSize: 17,fontStyle: FontStyle.italic
+                        ),),
+                        const SizedBox(height: 10,),
+                        Text("Order Pickup Time : "+dataMap["pickUpTime"].toString(),style: TextStyle(
+                            fontWeight: FontWeight.bold,color: Colors.teal,fontSize: 17,fontStyle: FontStyle.italic
+                        ),),
+                        Divider(thickness: 2,color: Colors.red,),
+
+
                         orderStatus == "ready"
                             ? Image.asset("assets/images/ready1.jpg")
                             : Image.asset("assets/images/picked.png"),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20,top: 30),
+                              child: SizedBox(
+                                height: 50,
+                                width: 150,
+                                child: ElevatedButton(style:ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.teal,
+                                    elevation: 0
+                                )
+                                    ,onPressed: !clicked?(){
+                                  FirebaseFirestore.instance.collection("orders").doc(widget.orderID).update({"status":"picked"}).then((value){
+                                    FirebaseFirestore.instance
+                                        .collection("users")
+                                        .doc(orderByUser)
+                                        .collection("orders").doc(widget.orderID).update({"status":"picked"}).then((value){
+                                      const clicked=true;
+
+                                    });
+                                  });
+                                }:null, child:
+                                Text("Order Picked !",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18),)),
+                              ),
+                            ),
+
+          InkWell(
+          onTap: ()
+          {
+          Navigator.pop(context);
+          },
+          child: Padding(
+          padding: const EdgeInsets.only(left: 50,top: 30),
+
+          child: Container(
+          decoration: BoxDecoration(
+
+          color: Colors.teal,
+          ),
+
+          height:50 ,
+          width: 150,
+          child: Center(
+          child: Text(" Go Back",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18),),
+            ),
+            ),
+            ),
+            ),],
+                        )
 
 
                       ],

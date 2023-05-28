@@ -27,7 +27,18 @@ class _NewOrdersScreenState extends State<NewOrdersScreen>
                  image: AssetImage('assets/images/bg.png'), fit: BoxFit.cover,) ),
           child: Scaffold(
             backgroundColor: Colors.transparent,
-            appBar: AppBar(backgroundColor: Colors.teal[900]?.withOpacity(0.85),title:Text("New Orders")),
+            appBar: AppBar(
+              title: Text("N E W  O R D E R S",
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Montserrat'
+                ), ),
+              centerTitle:true ,
+              automaticallyImplyLeading: false,
+              backgroundColor: Colors.teal[900]?.withOpacity(0.85),
+              elevation: 0,
+            ),
             body: StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection("orders")
