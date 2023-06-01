@@ -44,74 +44,80 @@ class _EarningsScreenState extends State<EarningsScreen>
   @override
   Widget build(BuildContext context)
   {
-    return Scaffold(
-      backgroundColor: Colors.black,
+    return SafeArea(
+        child: Container(constraints: BoxConstraints.expand(),
+    decoration: BoxDecoration(
+    image: DecorationImage(
+    image: AssetImage('assets/images/bg.png'), fit: BoxFit.cover,) ),
+    child: Scaffold(
+    backgroundColor: Colors.transparent,
+    appBar: AppBar(
+    title: Text("M Y   E A R N I N G S",
+    style: TextStyle(
+    fontSize: 25,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Montserrat'
+    ), ),
+    centerTitle:true ,
+    automaticallyImplyLeading: false,
+    backgroundColor: Colors.teal[900]?.withOpacity(0.85),
+    elevation: 0,
+    ),
       body: SafeArea(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
 
-              Text(
-                "€ " + sellerTotalEarnings!.toString(),
-                style: const TextStyle(
-                  fontSize: 80,
-                  color: Colors.white,
-                  fontFamily: "Signatra"
-                ),
-              ),
-
-              const Text(
-                "Total Earnings",
-                style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.grey,
-                    letterSpacing: 3,
-                    fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  " ₹ " + sellerTotalEarnings!.toString(),
+                  style: const TextStyle(
+                    fontSize: 80,
+                    color: Colors.white,
+                    fontFamily: "Signatra"
+                  ),
                 ),
               ),
 
               const SizedBox(
                 height: 20,
-                width: 200,
+                width: 250,
                 child: Divider(
                   color: Colors.white,
-                  thickness: 1.5,
+                  thickness: 2,
                 ),
               ),
 
-              const SizedBox(height: 40.0,),
+              const SizedBox(height: 50.0,),
 
-              GestureDetector(
-                onTap: ()
-                {
-                  Navigator.push(context, MaterialPageRoute(builder: (c)=> const HomeScreen()));
-                },
-                child: const Card(
-                  color: Colors.white54,
-                  margin: EdgeInsets.symmetric(vertical: 40, horizontal: 140),
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                    ),
-                    title: Text(
-                      "Back",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
+              Center(
+                  child: InkWell(
+                    onTap: ()
+                    {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+
+                        color: Colors.teal,
+                      ),
+
+                      height:50 ,
+                      width: MediaQuery.of(context).size.width-40,
+                      child: Center(
+                        child: Text(" GO BACK",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18),),
                       ),
                     ),
-                  ),
-                ),
-              ),
+                  )
+              )
+
 
             ],
           ),
         ),
       ),
-    );
+    )));
   }
 }

@@ -27,7 +27,18 @@ class _HistoryScreenState extends State<HistoryScreen>
     image: AssetImage('assets/images/bg.png'), fit: BoxFit.cover,) ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(backgroundColor: Colors.teal[900]?.withOpacity(0.85),title: const Text("HISTORY"),),
+        appBar: AppBar(
+          title: Text("M Y   H I S T O R Y",
+            style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Montserrat'
+            ), ),
+          centerTitle:true ,
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.teal[900]?.withOpacity(0.85),
+          elevation: 0,
+        ),
         body: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
               .collection("orders")

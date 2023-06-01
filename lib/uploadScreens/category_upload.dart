@@ -30,7 +30,7 @@ class _CategoryUploadScreenState extends State<CategoryUploadScreen> {
   defaultScreen()
   {
     return Container(
-        child: Container(constraints: BoxConstraints.expand(),
+        constraints: BoxConstraints.expand(),
     decoration: BoxDecoration(
     image: DecorationImage(
     image: AssetImage('assets/images/bg.png'), fit: BoxFit.cover,) ),
@@ -73,7 +73,7 @@ class _CategoryUploadScreenState extends State<CategoryUploadScreen> {
           ),
         ),
       ),
-    )));
+    ));
   }
 
 
@@ -85,7 +85,7 @@ class _CategoryUploadScreenState extends State<CategoryUploadScreen> {
         {
           return  SimpleDialog(
             title: const Text("Category Image",style: TextStyle(
-              color: Colors.amber,fontWeight: FontWeight.bold,
+              color: Colors.teal,fontWeight: FontWeight.bold,
             ),),
             children: [
               SimpleDialogOption(
