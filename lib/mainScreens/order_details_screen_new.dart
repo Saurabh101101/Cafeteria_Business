@@ -1,7 +1,13 @@
+import 'dart:convert';
+
 import 'package:cafeteria_business/widgets/progress_bar.dart';
 import 'package:cafeteria_business/widgets/status_banner.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:intl/intl.dart';
 
@@ -27,6 +33,10 @@ class _OrderDetailsScreenNewState extends State<OrderDetailsScreenNew>
   double orderPrice=0.0;
   double previousEarning=0.0;
   bool clicked=false;
+  String token="";
+  String userName="";
+  String userPhone="";
+  late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin=FlutterLocalNotificationsPlugin();
 
 
 
@@ -42,6 +52,45 @@ class _OrderDetailsScreenNewState extends State<OrderDetailsScreenNew>
       orderPrice=double.parse(DocumentSnapshot.data()!["totalAmount"].toString());
 
     });
+
+
+  }
+
+  void sendPushMessage(String token, String body, String title) async
+  {
+    try{
+      await http.post(
+        Uri.parse('https://fcm.googleapis.com/fcm/send'),
+        headers:<String,String>{
+          'Content-Type': 'application/json',
+          'Authorization': 'key=AAAACVXrvxg:APA91bHpRrad2YKFRmqt-YGgis9xWMr1T9mRkISQnBLn6bkCjrRthSLy8pgj6N8Jd-tJlPp4yaW3t9XrXKwjGJFTr_FbGKX3KVe6qQhUyNyG4tSdBWHVKKXvX5gXgCEMxKcJN2sIoOUM'
+        },
+        body: jsonEncode(
+          <String,dynamic>{
+
+            'priority':'high',
+            'data':<String,dynamic>{
+              'click_action':'FLUTTER_NOTIFICATION_CLICK',
+              'status':'done',
+              'body':body,
+              'title':title,
+            },
+
+            "notification":<String,dynamic>{
+              "title":title,
+              "body":body,
+              "android_channel_id":"cafeteria_app",
+            },
+            "to": token,
+          },
+
+        ),
+      );
+    } catch(e){
+      if(kDebugMode){
+        print("Error");
+      }
+    }
   }
   
   
@@ -52,10 +101,18 @@ class _OrderDetailsScreenNewState extends State<OrderDetailsScreenNew>
     });
   }
 
-  @override
+  getToken() async
+  {
+    await FirebaseFirestore.instance.collection("users").doc(orderByUser).get().then((DocumentSnapshot) {
+      token=DocumentSnapshot.data()!["token"].toString();
+
+    });
+  }
+
+
+   @override
   void initState() {
     super.initState();
-
     getOrderInfo();
     getPreviousEarning();
   }
@@ -116,6 +173,14 @@ class _OrderDetailsScreenNewState extends State<OrderDetailsScreenNew>
                   Text("Order Pickup Time : "+dataMap["pickUpTime"].toString(),style: TextStyle(
                       fontWeight: FontWeight.bold,color: Colors.teal,fontSize: 17,fontStyle: FontStyle.italic
                   ),),
+                  const SizedBox(height: 10,),
+                  Text("Order By : "+dataMap["orderUserName"].toString(),style: TextStyle(
+                      fontWeight: FontWeight.bold,color: Colors.teal,fontSize: 17,fontStyle: FontStyle.italic
+                  ),),
+                  const SizedBox(height: 10,),
+                  Text("Contact Info : "+dataMap["userPhone"].toString(),style: TextStyle(
+                      fontWeight: FontWeight.bold,color: Colors.teal,fontSize: 17,fontStyle: FontStyle.italic
+                  ),),
                   Divider(thickness: 2,color: Colors.red,),
                   orderStatus == "ready"
                       ? Image.asset("assets/images/ready1.jpg")
@@ -140,11 +205,19 @@ class _OrderDetailsScreenNewState extends State<OrderDetailsScreenNew>
                                 FirebaseFirestore.instance
                                     .collection("sellers")
                                     .doc("DpuAj3utfVef9klNf5Pyb3tTwyH3").update({"earnings":(previousEarning+orderPrice)}).then((value){
-                                  const clicked=true;
+                                      setState(() {
+
+                                        getToken();
+                                        sendPushMessage(token, "Your Order is ready to Pickup !","Order Status !");
+                                        const clicked=true;
+                                      });
+
+
+
                                 });
                               });
                             });
-                          }:null,  child:
+                              }:null,  child:
                           Text("Order Ready !",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18),)),
                         ),
                       ),

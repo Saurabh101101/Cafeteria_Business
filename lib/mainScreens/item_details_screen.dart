@@ -52,7 +52,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
 
       appBar: AppBar(
         backgroundColor: Colors.teal[900]?.withOpacity(0.85),
-        title: Text(sharedPreferences!.getString("name").toString()) ,
+
       ),
       body: SingleChildScrollView(
         child: Column(

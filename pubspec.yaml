@@ -45,6 +45,9 @@ dependencies:
   shared_preferences: ^2.0.18
   fluttertoast: ^8.2.1
   intl: ^0.17.0
+  firebase_messaging: 14.6.1
+  http: ^0.13.6
+  flutter_local_notifications: ^14.1.0
 
 
 

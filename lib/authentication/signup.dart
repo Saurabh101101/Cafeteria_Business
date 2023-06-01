@@ -65,7 +65,7 @@ class MySignupState extends State <MySignup> {
         );
       }
     else{
-      if(nameController.text.isNotEmpty && phoneController.text.isNotEmpty && emailController.text.isNotEmpty && passwordController.text.isNotEmpty)
+      if(nameController.text.isNotEmpty && phoneController.text.isNotEmpty && emailController.text.isNotEmpty && passwordController.text.isNotEmpty && phoneController.text.length==10 && phoneController.text.contains(RegExp(r'^[0-9]+$')))
       {
         //start upload
         showDialog(context: context, builder: (c)
@@ -92,7 +92,7 @@ class MySignupState extends State <MySignup> {
             context: context,
             builder:(c)
             {
-              return ErrorDialog(message: "Please Fill All Required Fields",);
+              return ErrorDialog(message: "Please Fill All Required Fields Correctly !",);
             }
         );
       }

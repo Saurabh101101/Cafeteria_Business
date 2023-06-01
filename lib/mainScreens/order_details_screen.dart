@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:cafeteria_business/widgets/progress_bar.dart';
 import 'package:cafeteria_business/widgets/status_banner.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cafeteria_business/global/global.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:intl/intl.dart';
 
@@ -27,6 +31,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen>
   String orderStatus = "";
   String orderByUser = "";
   String sellerId = "";
+  String token="";
 
   bool clicked=false;
 
@@ -53,6 +58,10 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen>
 
 
 
+
+
+
+
   @override
   void initState() {
     super.initState();
@@ -61,6 +70,51 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen>
 
 
 
+  }
+
+  getToken() async
+  {
+    await FirebaseFirestore.instance.collection("users").doc(orderByUser).get().then((DocumentSnapshot) {
+      token=DocumentSnapshot.data()!["token"].toString();
+
+    });
+  }
+
+  void sendPushMessage(String token, String body, String title) async
+  {
+    try{
+      await http.post(
+        Uri.parse('https://fcm.googleapis.com/fcm/send'),
+        headers:<String,String>{
+          'Content-Type': 'application/json',
+          'Authorization': 'key=AAAACVXrvxg:APA91bHpRrad2YKFRmqt-YGgis9xWMr1T9mRkISQnBLn6bkCjrRthSLy8pgj6N8Jd-tJlPp4yaW3t9XrXKwjGJFTr_FbGKX3KVe6qQhUyNyG4tSdBWHVKKXvX5gXgCEMxKcJN2sIoOUM'
+        },
+        body: jsonEncode(
+          <String,dynamic>{
+
+            'priority':'high',
+            'data':<String,dynamic>{
+              'click_action':'FLUTTER_NOTIFICATION_CLICK',
+              'status':'done',
+              'body':body,
+              'title':title,
+            },
+
+            "notification":<String,dynamic>{
+              "title":title,
+              "body":body,
+              "android_channel_id":"cafeteria_app",
+            },
+            "to": token,
+          },
+
+        ),
+      );
+    } catch(e){
+      if(kDebugMode){
+        print("Error");
+      }
+    }
   }
 
 
@@ -102,6 +156,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen>
             return snapshot.hasData
                 ? Container(
                     child: Column(
+
                       children: [
 
                         Padding(
@@ -124,6 +179,14 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen>
                         ),),
                         const SizedBox(height: 10,),
                         Text("Order Pickup Time : "+dataMap["pickUpTime"].toString(),style: TextStyle(
+                            fontWeight: FontWeight.bold,color: Colors.teal,fontSize: 17,fontStyle: FontStyle.italic
+                        ),),
+                        const SizedBox(height: 10,),
+                        Text("Order By : "+dataMap["orderUserName"].toString(),style: TextStyle(
+                            fontWeight: FontWeight.bold,color: Colors.teal,fontSize: 17,fontStyle: FontStyle.italic
+                        ),),
+                        const SizedBox(height: 10,),
+                        Text("Contact Info : "+dataMap["userPhone"].toString(),style: TextStyle(
                             fontWeight: FontWeight.bold,color: Colors.teal,fontSize: 17,fontStyle: FontStyle.italic
                         ),),
                         Divider(thickness: 2,color: Colors.red,),
@@ -149,7 +212,12 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen>
                                         .collection("users")
                                         .doc(orderByUser)
                                         .collection("orders").doc(widget.orderID).update({"status":"picked"}).then((value){
-                                      const clicked=true;
+
+                                      setState(() {
+                                          getToken();
+                                          sendPushMessage(token, "Your Order is Picked up and moved to History Tab", "Order Status !");
+                                          const clicked=true;
+                                      });
 
                                     });
                                   });

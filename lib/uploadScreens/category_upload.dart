@@ -85,7 +85,7 @@ class _CategoryUploadScreenState extends State<CategoryUploadScreen> {
         {
           return  SimpleDialog(
             title: const Text("Category Image",style: TextStyle(
-              color: Colors.amber,fontWeight: FontWeight.bold,
+              color: Colors.teal,fontWeight: FontWeight.bold,
             ),),
             children: [
               SimpleDialogOption(
