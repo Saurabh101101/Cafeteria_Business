@@ -40,10 +40,10 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
         title: Text("Confirmation"),
         content: Text("Do you really want to delete entire category?"),
         actions: <Widget>[
-          ElevatedButton(onPressed: () {
+          ElevatedButton(style:ElevatedButton.styleFrom(primary:Colors.teal),onPressed: () {
         Navigator.of(context).pop();
       }, child: Text("Cancel")),
-          ElevatedButton(onPressed: () {
+          ElevatedButton(style:ElevatedButton.styleFrom(primary:Colors.teal),onPressed: () {
             deleteMenu(widget.model!.menuId!);
             Navigator.of(context).pop();
           }, child: Text("Yes")),

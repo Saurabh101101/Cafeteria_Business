@@ -49,6 +49,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen>
       orderStatus = DocumentSnapshot.data()!["status"].toString();
       orderByUser = DocumentSnapshot.data()!["orderBy"].toString();
       sellerId = DocumentSnapshot.data()!["sellerUID"].toString();
+      token=DocumentSnapshot.data()!["token"].toString();
     });
   }
 
@@ -72,13 +73,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen>
 
   }
 
-  getToken() async
-  {
-    await FirebaseFirestore.instance.collection("users").doc(orderByUser).get().then((DocumentSnapshot) {
-      token=DocumentSnapshot.data()!["token"].toString();
-
-    });
-  }
+  // getToken() async
+  // {
+  //   await FirebaseFirestore.instance.collection("users").doc(orderByUser).get().then((DocumentSnapshot) {
+  //     token=DocumentSnapshot.data()!["token"].toString();
+  //
+  //   });
+  // }
 
   void sendPushMessage(String token, String body, String title) async
   {
@@ -212,10 +213,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen>
                                         .collection("users")
                                         .doc(orderByUser)
                                         .collection("orders").doc(widget.orderID).update({"status":"picked"}).then((value){
-
+                                      sendPushMessage(token, "Your Order is Picked up and moved to History Tab", "Order Status !");
                                       setState(() {
-                                          getToken();
-                                          sendPushMessage(token, "Your Order is Picked up and moved to History Tab", "Order Status !");
+
                                           const clicked=true;
                                       });
 
