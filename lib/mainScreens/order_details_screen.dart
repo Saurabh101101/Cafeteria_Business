@@ -157,18 +157,20 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen>
             return snapshot.hasData
                 ? Container(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
 
                       children: [
 
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.only(top:8.0),
                           child: Text(
-                            " Total Amount : ₹ " + dataMap!["totalAmount"].toString(),
+                            "Total Amount : ₹ " + dataMap!["totalAmount"].toString(),
                             style: const  TextStyle(
                                 fontWeight: FontWeight.bold,color: Colors.teal,fontSize: 17,fontStyle: FontStyle.italic,
                             ),
                           ),
                         ),
+                        const SizedBox(height: 10,),
 
                         Text( "Order Id :"+dataMap!["orderId"].toString(),style: TextStyle(
                             fontWeight: FontWeight.bold,color: Colors.teal,fontSize: 17,fontStyle: FontStyle.italic
@@ -190,12 +192,15 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen>
                         Text("Contact Info : "+dataMap["userPhone"].toString(),style: TextStyle(
                             fontWeight: FontWeight.bold,color: Colors.teal,fontSize: 17,fontStyle: FontStyle.italic
                         ),),
-                        Divider(thickness: 2,color: Colors.red,),
+                        Divider(thickness: 2,color: Colors.teal,),
+                        const SizedBox(height: 10,),
 
 
-                        orderStatus == "ready"
-                            ? Image.asset("assets/images/ready1.jpg")
-                            : Image.asset("assets/images/picked.png"),
+                        Center(
+                          child: orderStatus == "ready"
+                              ? Image.asset("assets/images/ready1.jpg")
+                              : Image.asset("assets/images/picked.png"),
+                        ),
                         Row(
                           children: [
                             Padding(

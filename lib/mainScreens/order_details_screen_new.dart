@@ -151,16 +151,17 @@ class _OrderDetailsScreenNewState extends State<OrderDetailsScreenNew>
             return snapshot.hasData
                 ? Container(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      " Total Amount : ₹ " + dataMap!["totalAmount"].toString(),
+                    padding: const EdgeInsets.only(top:8.0),
+                    child: Text("Total Amount : ₹ " + dataMap!["totalAmount"].toString(),
                       style: const  TextStyle(
                         fontWeight: FontWeight.bold,color: Colors.teal,fontSize: 17,fontStyle: FontStyle.italic,
                       ),
                     ),
                   ),
+                  const SizedBox(height: 10,),
 
                   Text( "Order Id :"+dataMap!["orderId"].toString(),style: TextStyle(
                       fontWeight: FontWeight.bold,color: Colors.teal,fontSize: 17,fontStyle: FontStyle.italic
@@ -182,10 +183,11 @@ class _OrderDetailsScreenNewState extends State<OrderDetailsScreenNew>
                   Text("Contact Info : "+dataMap["userPhone"].toString(),style: TextStyle(
                       fontWeight: FontWeight.bold,color: Colors.teal,fontSize: 17,fontStyle: FontStyle.italic
                   ),),
-                  Divider(thickness: 2,color: Colors.red,),
+                  Divider(thickness: 2,color: Colors.teal,),
+                  const SizedBox(height: 10,),
                   orderStatus == "ready"
-                      ? Image.asset("assets/images/ready1.jpg")
-                      : Image.asset("assets/images/placed.png"),
+                      ? Center(child: Image.asset("assets/images/ready1.jpg"))
+                      : Center(child: Image.asset("assets/images/placed.png")),
                   Row(
                     children: [
                       Padding(
