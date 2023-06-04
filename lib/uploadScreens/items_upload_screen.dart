@@ -150,11 +150,17 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
   itemsUploadFormScreen()
   {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Uploading New Item"),
-        centerTitle: true,
+      appBar:AppBar(
+        title: Text("ITEM UPLOAD",
+          style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Montserrat'
+          ), ),
+        centerTitle:true ,
         automaticallyImplyLeading: true,
-        leading: IconButton(
+        backgroundColor: Colors.teal[900]?.withOpacity(0.85),
+        elevation: 0,leading: IconButton(
           icon:const Icon(Icons.arrow_back,color: Colors.white,),
           onPressed: ()
           {
@@ -198,10 +204,12 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
               child:  TextField(
                 style: const TextStyle(color: Colors.black),
                 controller: shortInfoController,
-                decoration: const InputDecoration(
-                  hintText: " Info",
-                  hintStyle: TextStyle(color:Colors.grey),
-                  border: InputBorder.none,
+                decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText:'Item Info',
+                    hintStyle: TextStyle(color: Colors.teal[900]),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))
                 ),
               ),
             ),
@@ -217,10 +225,12 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
               child:  TextField(
                 style: const TextStyle(color: Colors.black),
                 controller: titleController,
-                decoration: const InputDecoration(
-                  hintText: " Title",
-                  hintStyle: TextStyle(color:Colors.grey),
-                  border: InputBorder.none,
+                decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText:'Item Name',
+                    hintStyle: TextStyle(color: Colors.teal[900]),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))
                 ),
               ),
             ),
@@ -237,10 +247,12 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
               child:  TextField(
                 style: const TextStyle(color: Colors.black),
                 controller: descriptionController,
-                decoration: const InputDecoration(
-                  hintText: " Description",
-                  hintStyle: TextStyle(color:Colors.grey),
-                  border: InputBorder.none,
+                decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText:'Description',
+                    hintStyle: TextStyle(color: Colors.teal[900]),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))
                 ),
               ),
             ),
@@ -257,10 +269,12 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
                 keyboardType: TextInputType.number,
                 style: const TextStyle(color: Colors.black),
                 controller: priceController,
-                decoration: const InputDecoration(
-                  hintText: " Price",
-                  hintStyle: TextStyle(color:Colors.grey),
-                  border: InputBorder.none,
+                decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText:'Item Price',
+                    hintStyle: TextStyle(color: Colors.teal[900]),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))
                 ),
               ),
             ),

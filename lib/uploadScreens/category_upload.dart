@@ -145,27 +145,54 @@ class _CategoryUploadScreenState extends State<CategoryUploadScreen> {
   menusUploadFormScreen()
   {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Uploading New Category"),
-        centerTitle: true,
+      appBar:AppBar(
+        title: Text("CATEGORY UPLOAD",
+          style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Montserrat'
+          ), ),
+        centerTitle:true ,
         automaticallyImplyLeading: true,
-        leading: IconButton(
-          icon:const Icon(Icons.arrow_back,color: Colors.white,),
-          onPressed: ()
-          {
-            clearMenuUploadForm();
-          },
-        ),
+        backgroundColor: Colors.teal[900]?.withOpacity(0.85),
+        elevation: 0,leading: IconButton(
+        icon:const Icon(Icons.arrow_back,color: Colors.white,),
+        onPressed: ()
+        {
+          clearMenuUploadForm();
+        },
+      ),
         actions: [
           TextButton(
-              onPressed: uploading?null:()=>validateUploadForm(),
+            onPressed: uploading?null:()=>validateUploadForm(),
 
-              child: Text("Add",style: TextStyle(color: Colors.white,
-                  fontWeight:FontWeight.bold,fontSize: 18),
-              ),
+            child: Text("Add",style: TextStyle(color: Colors.white,
+                fontWeight:FontWeight.bold,fontSize: 18),
+            ),
           ),
         ],
       ),
+      // appBar: AppBar(
+      //   title: const Text("Uploading New Category"),
+      //   centerTitle: true,
+      //   automaticallyImplyLeading: true,
+      //   leading: IconButton(
+      //     icon:const Icon(Icons.arrow_back,color: Colors.white,),
+      //     onPressed: ()
+      //     {
+      //       clearMenuUploadForm();
+      //     },
+      //   ),
+      //   actions: [
+      //     TextButton(
+      //         onPressed: uploading?null:()=>validateUploadForm(),
+      //
+      //         child: Text("Add",style: TextStyle(color: Colors.white,
+      //             fontWeight:FontWeight.bold,fontSize: 18),
+      //         ),
+      //     ),
+      //   ],
+      // ),
       body: ListView(
         children: [
           uploading==true?linearProgress():const Text(""),
@@ -193,10 +220,12 @@ class _CategoryUploadScreenState extends State<CategoryUploadScreen> {
               child:  TextField(
                 style: const TextStyle(color: Colors.black),
                 controller: shortInfoController,
-                decoration: const InputDecoration(
-                  hintText: "Menu Info",
-                  hintStyle: TextStyle(color:Colors.grey),
-                  border: InputBorder.none,
+                decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText:'Category Info',
+                    hintStyle: TextStyle(color: Colors.teal[900]),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))
                 ),
               ),
             ),
@@ -212,10 +241,12 @@ class _CategoryUploadScreenState extends State<CategoryUploadScreen> {
               child:  TextField(
                 style: const TextStyle(color: Colors.black),
                 controller: titleController,
-                decoration: const InputDecoration(
-                  hintText: "Menu Title",
-                  hintStyle: TextStyle(color:Colors.grey),
-                  border: InputBorder.none,
+                decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText:'Category Title',
+                    hintStyle: TextStyle(color: Colors.teal[900]),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))
                 ),
               ),
             ),

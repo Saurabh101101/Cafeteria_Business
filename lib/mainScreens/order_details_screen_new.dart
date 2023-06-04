@@ -50,6 +50,7 @@ class _OrderDetailsScreenNewState extends State<OrderDetailsScreenNew>
       orderByUser = DocumentSnapshot.data()!["orderBy"].toString();
       sellerId = DocumentSnapshot.data()!["sellerUID"].toString();
       orderPrice=double.parse(DocumentSnapshot.data()!["totalAmount"].toString());
+      token=DocumentSnapshot.data()!["token"].toString();
 
     });
 
@@ -101,13 +102,13 @@ class _OrderDetailsScreenNewState extends State<OrderDetailsScreenNew>
     });
   }
 
-  getToken() async
-  {
-    await FirebaseFirestore.instance.collection("users").doc(orderByUser).get().then((DocumentSnapshot) {
-      token=DocumentSnapshot.data()!["token"].toString();
-
-    });
-  }
+  // getToken() async
+  // {
+  //   await FirebaseFirestore.instance.collection("users").doc(orderByUser).get().then((DocumentSnapshot) {
+  //     token=DocumentSnapshot.data()!["token"].toString();
+  //
+  //   });
+  // }
 
 
    @override
@@ -205,10 +206,9 @@ class _OrderDetailsScreenNewState extends State<OrderDetailsScreenNew>
                                 FirebaseFirestore.instance
                                     .collection("sellers")
                                     .doc("DpuAj3utfVef9klNf5Pyb3tTwyH3").update({"earnings":(previousEarning+orderPrice)}).then((value){
+                                      sendPushMessage(token, "Your Order is ready to Pickup !","Order Status !");
                                       setState(() {
 
-                                        getToken();
-                                        sendPushMessage(token, "Your Order is ready to Pickup !","Order Status !");
                                         const clicked=true;
                                       });
 
